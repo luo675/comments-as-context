@@ -1,5 +1,6 @@
 ---
 name: boundary-comments
+type: comment-convention
 description: Marks code's architectural layer, dependency direction, and forbidden crossing boundaries in multi-module projects. Triggers on: creating or modifying files on layer boundaries in layered architecture or multi-module projects.
 ---
 

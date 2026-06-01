@@ -1,5 +1,6 @@
 ---
 name: dependency-comments
+type: comment-convention
 description: Annotates callers and callees at function/module headers to form explicit call chain knowledge. Triggers on: writing or modifying public functions called from multiple sites, or functions in deep call chains.
 ---
 

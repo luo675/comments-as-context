@@ -1,5 +1,6 @@
 ---
 name: magic-value-comments
+type: comment-convention
 description: Annotates literal constants (numbers, strings, flags) with meaning, scope, and modification impact. Triggers on: defining numeric/string/boolean constants, config items, timeouts, limits, or feature flags.
 ---
 

@@ -1,5 +1,6 @@
 ---
 name: file-header-comments
+type: comment-convention
 description: Enforces structured file header comments explaining file purpose, related files, and modification history. Triggers on: creating or editing files without header comments.
 ---
 

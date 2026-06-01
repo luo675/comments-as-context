@@ -18,29 +18,41 @@ PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 SKILL_SOURCE="$PROJECT_ROOT/skill"
 SKILL_TARGET="${HOME}/.claude/skills"
 
-# Parse arguments
-MODE="${1:---all}"
-
-# Determine which sets to install
+# Defaults
 CORE=false
 EXTENSION=false
 
-case "$MODE" in
-  --all|-a|"")
-    CORE=true
-    EXTENSION=true
-    ;;
-  --core|-c)
-    CORE=true
-    ;;
-  --extension|-e)
-    EXTENSION=true
-    ;;
-  *)
-    echo "Usage: $0 [--core|--extension|--all]"
-    exit 1
-    ;;
-esac
+# Parse arguments
+for arg in "$@"; do
+  case "$arg" in
+    --core|-c)    CORE=true ;;
+    --extension|-e) EXTENSION=true ;;
+    --all|-a)     CORE=true; EXTENSION=true ;;
+    --help|-h)
+      echo "Usage: $0 [OPTIONS]"
+      echo ""
+      echo "Install comments-as-context skills to ~/.claude/skills/"
+      echo ""
+      echo "Options:"
+      echo "  --core, -c        Install core skills only"
+      echo "  --extension, -e   Install extension skills only"
+      echo "  --all, -a         Install all skills (default)"
+      echo "  --help, -h        Show this help message"
+      exit 0
+      ;;
+    *)
+      echo "Unknown option: $arg"
+      echo "Usage: $0 [--core|--extension|--all|--help]"
+      exit 1
+      ;;
+  esac
+done
+
+# If no flags specified, install all
+if [ "$CORE" = false ] && [ "$EXTENSION" = false ]; then
+  CORE=true
+  EXTENSION=true
+fi
 
 # Create target directory
 mkdir -p "$SKILL_TARGET"

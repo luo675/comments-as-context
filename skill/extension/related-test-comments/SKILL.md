@@ -1,5 +1,6 @@
 ---
 name: related-test-comments
+type: comment-convention
 description: Associates implementation code with test files and test coverage scenarios. Triggers on: modifying implementation code (especially bug fixes, new features, core logic refactoring).
 ---
 

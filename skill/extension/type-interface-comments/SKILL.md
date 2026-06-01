@@ -1,5 +1,6 @@
 ---
 name: type-interface-comments
+type: comment-convention
 description: Ensures structured annotations on TypeScript type aliases, interfaces, generic parameters, and complex union types. Triggers on: defining interfaces, type aliases, generic parameters, union types, or modifying existing type fields.
 ---
 

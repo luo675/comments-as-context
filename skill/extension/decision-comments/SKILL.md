@@ -1,5 +1,6 @@
 ---
 name: decision-comments
+type: comment-convention
 description: Records technical decision context — why a choice was made, what alternatives were considered, and trade-offs accepted. Triggers on: technology choices, architecture pattern decisions, performance optimization strategies, or non-obvious trade-off decisions.
 ---
 

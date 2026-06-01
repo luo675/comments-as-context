@@ -1,5 +1,6 @@
 ---
 name: side-effect-comments
+type: comment-convention
 description: Labels functions with side effects beyond return values — global state mutation, I/O, network calls, DOM operations, timers, subscriptions. Triggers on: functions containing database writes, network requests, file I/O, DOM operations, timer registration, or external resource allocation.
 ---
 

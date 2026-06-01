@@ -64,7 +64,7 @@ See the full discussion in [goal.md](../goal.md).
 comments-as-context/
 ├── README.md          # This file — bilingual reference (EN first, CN second)
 ├── README.html        # HTML version — visual display with EN/CN toggle
-└── comments-as-context/skill/             # All skill definitions
+└── skill/                                 # All skill definitions
     ├── core/          # Core skills — daily use, always loaded
     │   ├── file-header-comments/
     │   │   └── SKILL.md
@@ -105,7 +105,7 @@ comments-as-context/
 comments-as-context/
 ├── README.md          # 本文档 — 双语（英前中后）
 ├── README.html        # HTML 版 — 可视化展示，可切换中英文
-└── comments-as-context/skill/             # 所有 skill 定义
+└── skill/                                 # 所有 skill 定义
     ├── core/          # 核心集 — 日常必用
     │   ├── file-header-comments/
     │   │   └── SKILL.md

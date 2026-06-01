@@ -1,5 +1,6 @@
 ---
 name: line-comments
+type: comment-convention
 description: Adds inline comments for non-obvious logic, algorithm decisions, hacks, performance optimizations, and business rules. Triggers on: complex logic, algorithm implementation, performance optimization, or framework workaround code.
 ---
 

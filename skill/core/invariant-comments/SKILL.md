@@ -1,5 +1,6 @@
 ---
 name: invariant-comments
+type: comment-convention
 description: Documents invariants that must always hold — conditions whose violation would cause crashes, data corruption, or security vulnerabilities. Triggers on: data structure definitions, business rule implementations, concurrency control, or code with sorting/unique/non-null constraints.
 ---
 

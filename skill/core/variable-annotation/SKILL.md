@@ -1,5 +1,6 @@
 ---
 name: variable-annotation
+type: comment-convention
 description: Annotates module-level variables, shared state, and config objects with usage scope, read-write sources, and modification impact. Triggers on: defining or modifying module-scope variables.
 ---
 

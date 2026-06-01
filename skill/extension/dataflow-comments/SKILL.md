@@ -1,5 +1,6 @@
 ---
 name: dataflow-comments
+type: comment-convention
 description: Documents data flow paths — sources, processing chains, and destinations through the system. Triggers on: implementing data pipelines, ETL processes, multi-step processing chains, or cross-service data sync code.
 ---
 

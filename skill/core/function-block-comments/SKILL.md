@@ -1,5 +1,6 @@
 ---
 name: function-block-comments
+type: comment-convention
 description: Ensures JSDoc/TSDoc block comments on functions, methods, and constructors describing purpose, parameters, return values, and exceptions. Triggers on: writing or modifying function/method declarations.
 ---
 

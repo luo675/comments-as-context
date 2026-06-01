@@ -1,5 +1,6 @@
 ---
 name: deprecation-migration-comments
+type: comment-convention
 description: Labels deprecated code with replacement, removal plan, and migration path. Triggers on: API signature changes, function/module renaming, library upgrades, refactoring deletions, or TODO-marked code for removal.
 ---
 
