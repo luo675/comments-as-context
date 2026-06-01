@@ -107,21 +107,37 @@ comments-as-context/
 ├── README.html        # HTML 版 — 可视化展示，可切换中英文
 └── comments-as-context/skill/             # 所有 skill 定义
     ├── core/          # 核心集 — 日常必用
-    │   ├── file-header-comments.md
-    │   ├── function-block-comments.md
-    │   ├── line-comments.md
-    │   ├── variable-annotation.md
-    │   ├── side-effect-comments.md
-    │   ├── dependency-comments.md
-    │   ├── invariant-comments.md
-    │   └── magic-value-comments.md
+    │   ├── file-header-comments/
+    │   │   └── SKILL.md
+    │   ├── function-block-comments/
+    │   │   └── SKILL.md
+    │   ├── line-comments/
+    │   │   └── SKILL.md
+    │   ├── variable-annotation/
+    │   │   └── SKILL.md
+    │   ├── side-effect-comments/
+    │   │   └── SKILL.md
+    │   ├── dependency-comments/
+    │   │   └── SKILL.md
+    │   ├── invariant-comments/
+    │   │   └── SKILL.md
+    │   └── magic-value-comments/
+    │       └── SKILL.md
     └── extension/     # 扩展集 — 大型项目按需启用
-        ├── boundary-comments.md
-        ├── dataflow-comments.md
-        ├── decision-comments.md
-        ├── edge-case-comments.md
-        ├── deprecation-migration-comments.md
-        └── related-test-comments.md
+        ├── boundary-comments/
+        │   └── SKILL.md
+        ├── dataflow-comments/
+        │   └── SKILL.md
+        ├── decision-comments/
+        │   └── SKILL.md
+        ├── edge-case-comments/
+        │   └── SKILL.md
+        ├── deprecation-migration-comments/
+        │   └── SKILL.md
+        ├── related-test-comments/
+        │   └── SKILL.md
+        └── type-interface-comments/
+            └── SKILL.md
 ```
 
 ---
