@@ -1,0 +1,10 @@
+{
+  "name": "comments-as-context",
+  "version": "1.0.0",
+  "description": "Comments as Context — comment conventions to compensate for AI's limited context window",
+  "scripts": {
+    "validate": "node scripts/validate.js",
+    "install": "node scripts/install.js"
+  },
+  "license": "MIT"
+}
