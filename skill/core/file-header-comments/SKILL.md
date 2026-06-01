@@ -87,3 +87,12 @@ The `@file` is too generic ("Auth related utilities"). No `@related` listing the
 
 - **`@tag` 格式**（JSDoc 块注释内使用）：`@param`、`@returns`、`@state`、`@sideEffects`、`@callers`、`@invariant`、`@deprecated`、`@template`——用于标注「代码块」（函数、类、模块）的整体属性
 - **`// TAG:` 格式**（代码行上方独立使用）：`// DECISION:`、`// DATAFLOW:`、`// CONDITION BRANCH:`、`// LAYER:`、`// DEPENDS ON:`、`// IRREVERSIBLE:`——用于标注「单点位置」（单行、单步骤、单变量）的特性和约束
+
+## Checklist
+
+- [ ] Frontmatter (name, type, description) is present?
+- [ ] Description includes trigger conditions ("Triggers on: ...")?
+- [ ] Contains at least one ✅ Good and one ❌ Bad example?
+- [ ] File does not exceed 500 lines?
+- [ ] @tags used in examples match the rules defined above?
+- [ ] Chinese description of auto-trigger conditions is included?

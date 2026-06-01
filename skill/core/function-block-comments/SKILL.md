@@ -105,3 +105,12 @@ Comments say "Step 1/2/3/4/5" without explaining business intent or constraints 
 - [dependency-comments](../dependency-comments/SKILL.md) — 函数签名 + callers/callees 构成完整契约
 - [side-effect-comments](../side-effect-comments/SKILL.md) — 补充 @throws 无法覆盖的隐式副作用
 - [edge-case-comments](../../extension/edge-case-comments/SKILL.md) — 补充函数签名无法表达的边界场景
+
+## Checklist
+
+- [ ] Frontmatter (name, type, description) is present?
+- [ ] Description includes trigger conditions ("Triggers on: ...")?
+- [ ] Contains at least one ✅ Good and one ❌ Bad example?
+- [ ] File does not exceed 500 lines?
+- [ ] @tags used in examples match the rules defined above?
+- [ ] Chinese description of auto-trigger conditions is included?

@@ -93,3 +93,12 @@ An AI can mark it as deprecated but can't safely migrate callers or plan for its
 
 - [related-test-comments](../related-test-comments/SKILL.md) — 迁移后需运行关联测试验证
 - [decision-comments](../decision-comments/SKILL.md) — 记录为什么放弃旧方案、为什么选新方案
+
+## Checklist
+
+- [ ] Frontmatter (name, type, description) is present?
+- [ ] Description includes trigger conditions ("Triggers on: ...")?
+- [ ] Contains at least one ✅ Good and one ❌ Bad example?
+- [ ] File does not exceed 500 lines?
+- [ ] @tags used in examples match the rules defined above?
+- [ ] Chinese description of auto-trigger conditions is included?

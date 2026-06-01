@@ -92,3 +92,12 @@ No `@edgeCase` annotations for: negative page numbers (returns incorrect offset)
 
 - [invariant-comments](../../core/invariant-comments/SKILL.md) — 不变量定义了"什么情况下才算边界"
 - [line-comments](../../core/line-comments/SKILL.md) — 简单的边界条件可用行注释代替 @edgeCase
+
+## Checklist
+
+- [ ] Frontmatter (name, type, description) is present?
+- [ ] Description includes trigger conditions ("Triggers on: ...")?
+- [ ] Contains at least one ✅ Good and one ❌ Bad example?
+- [ ] File does not exceed 500 lines?
+- [ ] @tags used in examples match the rules defined above?
+- [ ] Chinese description of auto-trigger conditions is included?

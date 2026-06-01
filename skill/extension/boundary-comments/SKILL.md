@@ -89,3 +89,12 @@ The layer annotation "user module" is too vague — it doesn't specify the archi
 
 - [dependency-comments](../../core/dependency-comments/SKILL.md) — 跨层调用的 callers/callees 需遵守边界规则
 - [invariant-comments](../../core/invariant-comments/SKILL.md) — 架构约束是不变量的一种
+
+## Checklist
+
+- [ ] Frontmatter (name, type, description) is present?
+- [ ] Description includes trigger conditions ("Triggers on: ...")?
+- [ ] Contains at least one ✅ Good and one ❌ Bad example?
+- [ ] File does not exceed 500 lines?
+- [ ] @tags used in examples match the rules defined above?
+- [ ] Chinese description of auto-trigger conditions is included?

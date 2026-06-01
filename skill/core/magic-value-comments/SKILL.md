@@ -78,3 +78,12 @@ The comment only echoes the name ("Session timeout"). It doesn't say why 5 minut
 ## Related Skills
 
 - [decision-comments](../../extension/decision-comments/SKILL.md) — 注释"值是什么/控制什么"后，用 @decision 补充"为什么选这个值"
+
+## Checklist
+
+- [ ] Frontmatter (name, type, description) is present?
+- [ ] Description includes trigger conditions ("Triggers on: ...")?
+- [ ] Contains at least one ✅ Good and one ❌ Bad example?
+- [ ] File does not exceed 500 lines?
+- [ ] @tags used in examples match the rules defined above?
+- [ ] Chinese description of auto-trigger conditions is included?

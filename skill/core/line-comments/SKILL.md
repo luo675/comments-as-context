@@ -91,3 +91,12 @@ Comments explain trivial lines ("Adjust deadline", "Set retry limit") while the 
 
 - [edge-case-comments](../../extension/edge-case-comments/SKILL.md) — 边界条件应优先使用 @edgeCase，行注释仅补充其内联细节
 - [magic-value-comments](../magic-value-comments/SKILL.md) — 字面常量应提升为命名常量后注释，而非在行内注释数值
+
+## Checklist
+
+- [ ] Frontmatter (name, type, description) is present?
+- [ ] Description includes trigger conditions ("Triggers on: ...")?
+- [ ] Contains at least one ✅ Good and one ❌ Bad example?
+- [ ] File does not exceed 500 lines?
+- [ ] @tags used in examples match the rules defined above?
+- [ ] Chinese description of auto-trigger conditions is included?

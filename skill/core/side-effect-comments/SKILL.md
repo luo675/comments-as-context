@@ -129,3 +129,12 @@ The function is documented as a pure calculation function but silently WRITES to
 
 - [variable-annotation](../variable-annotation/SKILL.md) — 副作用修改的全局/模块变量需同时标注 @state
 - [boundary-comments](../../extension/boundary-comments/SKILL.md) — I/O 副作用应遵守架构层边界约束
+
+## Checklist
+
+- [ ] Frontmatter (name, type, description) is present?
+- [ ] Description includes trigger conditions ("Triggers on: ...")?
+- [ ] Contains at least one ✅ Good and one ❌ Bad example?
+- [ ] File does not exceed 500 lines?
+- [ ] @tags used in examples match the rules defined above?
+- [ ] Chinese description of auto-trigger conditions is included?

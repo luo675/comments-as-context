@@ -110,3 +110,12 @@ Each step is named ("Parse file", "Validate content", etc.) but the DATAFLOW for
 
 - [side-effect-comments](../../core/side-effect-comments/SKILL.md) — 数据流中的 I/O 步骤需同时标注副作用
 - [boundary-comments](../boundary-comments/SKILL.md) — 数据跨层流转需遵守架构边界
+
+## Checklist
+
+- [ ] Frontmatter (name, type, description) is present?
+- [ ] Description includes trigger conditions ("Triggers on: ...")?
+- [ ] Contains at least one ✅ Good and one ❌ Bad example?
+- [ ] File does not exceed 500 lines?
+- [ ] @tags used in examples match the rules defined above?
+- [ ] Chinese description of auto-trigger conditions is included?

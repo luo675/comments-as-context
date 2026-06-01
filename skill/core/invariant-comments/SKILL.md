@@ -87,3 +87,12 @@ Each operation is commented separately ("Update cache", "Update database"), but 
 ## Related Skills
 
 - [edge-case-comments](../../extension/edge-case-comments/SKILL.md) — 不变量被破坏时即触发边界条件处理路径，两者互补
+
+## Checklist
+
+- [ ] Frontmatter (name, type, description) is present?
+- [ ] Description includes trigger conditions ("Triggers on: ...")?
+- [ ] Contains at least one ✅ Good and one ❌ Bad example?
+- [ ] File does not exceed 500 lines?
+- [ ] @tags used in examples match the rules defined above?
+- [ ] Chinese description of auto-trigger conditions is included?

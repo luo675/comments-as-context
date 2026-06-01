@@ -85,3 +85,12 @@ The comment "Timeout in milliseconds" merely restates the name. Without `@state`
 
 - [magic-value-comments](../magic-value-comments/SKILL.md) — 常量和配置值优先使用该 Skill（当变量值不会在运行时改变时）
 - [side-effect-comments](../side-effect-comments/SKILL.md) — 标注变量修改带来的副作用
+
+## Checklist
+
+- [ ] Frontmatter (name, type, description) is present?
+- [ ] Description includes trigger conditions ("Triggers on: ...")?
+- [ ] Contains at least one ✅ Good and one ❌ Bad example?
+- [ ] File does not exceed 500 lines?
+- [ ] @tags used in examples match the rules defined above?
+- [ ] Chinese description of auto-trigger conditions is included?

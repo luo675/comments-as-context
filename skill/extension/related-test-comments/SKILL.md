@@ -90,3 +90,12 @@ The comment announces an update ("new international zone rates") but doesn't inc
 
 - [edge-case-comments](../edge-case-comments/SKILL.md) — 测试场景应覆盖测试文件中标注的所有 @edgeCase
 - [function-block-comments](../../core/function-block-comments/SKILL.md) — 测试应验证 @throws 中声明的异常路径
+
+## Checklist
+
+- [ ] Frontmatter (name, type, description) is present?
+- [ ] Description includes trigger conditions ("Triggers on: ...")?
+- [ ] Contains at least one ✅ Good and one ❌ Bad example?
+- [ ] File does not exceed 500 lines?
+- [ ] @tags used in examples match the rules defined above?
+- [ ] Chinese description of auto-trigger conditions is included?

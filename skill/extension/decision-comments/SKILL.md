@@ -85,3 +85,12 @@ The comment says WHAT was chosen (Redis) but not WHY it was chosen over alternat
 
 - [magic-value-comments](../../core/magic-value-comments/SKILL.md) — 值由 magic-value 注释，选的理由由 decision 注释
 - [deprecation-migration-comments](../deprecation-migration-comments/SKILL.md) — 过期的决策应进入废弃迁移流程
+
+## Checklist
+
+- [ ] Frontmatter (name, type, description) is present?
+- [ ] Description includes trigger conditions ("Triggers on: ...")?
+- [ ] Contains at least one ✅ Good and one ❌ Bad example?
+- [ ] File does not exceed 500 lines?
+- [ ] @tags used in examples match the rules defined above?
+- [ ] Chinese description of auto-trigger conditions is included?

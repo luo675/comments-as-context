@@ -95,3 +95,12 @@ Only parameter/return docs are present; `@callers` and `@callees` are missing. A
 
 - [file-header-comments](../file-header-comments/SKILL.md) — 文件级 @related → 模块间依赖，函数级 @callers → 调用链
 - [boundary-comments](../../extension/boundary-comments/SKILL.md) — 跨层调用需同时满足架构边界约束
+
+## Checklist
+
+- [ ] Frontmatter (name, type, description) is present?
+- [ ] Description includes trigger conditions ("Triggers on: ...")?
+- [ ] Contains at least one ✅ Good and one ❌ Bad example?
+- [ ] File does not exceed 500 lines?
+- [ ] @tags used in examples match the rules defined above?
+- [ ] Chinese description of auto-trigger conditions is included?
