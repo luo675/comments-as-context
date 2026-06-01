@@ -26,6 +26,19 @@ See the full discussion in [goal.md](../goal.md).
 
 ---
 
+## Compatibility / 兼容性
+
+| Tool | Support |
+|------|---------|
+| Claude Code | ✅ Native skill format |
+| Cursor | ✅ Rule format agnostic |
+| GitHub Copilot | ✅ Comment conventions apply to any AI |
+| Kiro | ⚠️ Format conversion required |
+
+Installation takes ~10 seconds. See [Usage](#usage--使用方式) below.
+
+---
+
 ## Table of Contents / 目录
 
 - [Project Objective / 项目目标](#project-objective--项目目标)
@@ -67,36 +80,51 @@ comments-as-context/
 └── skill/                                 # All skill definitions
     ├── core/          # Core skills — daily use, always loaded
     │   ├── file-header-comments/
-    │   │   └── SKILL.md
+    │   │   ├── SKILL.md
+    │   │   └── examples/  # before.ts / after.ts
     │   ├── function-block-comments/
-    │   │   └── SKILL.md
+    │   │   ├── SKILL.md
+    │   │   └── examples/
     │   ├── line-comments/
-    │   │   └── SKILL.md
+    │   │   ├── SKILL.md
+    │   │   └── examples/
     │   ├── variable-annotation/
-    │   │   └── SKILL.md
+    │   │   ├── SKILL.md
+    │   │   └── examples/
     │   ├── side-effect-comments/
-    │   │   └── SKILL.md
+    │   │   ├── SKILL.md
+    │   │   └── examples/
     │   ├── dependency-comments/
-    │   │   └── SKILL.md
+    │   │   ├── SKILL.md
+    │   │   └── examples/
     │   ├── invariant-comments/
-    │   │   └── SKILL.md
+    │   │   ├── SKILL.md
+    │   │   └── examples/
     │   └── magic-value-comments/
-    │       └── SKILL.md
+    │       ├── SKILL.md
+    │       └── examples/
     └── extension/     # Extension skills — large projects, opt-in
         ├── boundary-comments/
-        │   └── SKILL.md
+        │   ├── SKILL.md
+        │   └── examples/
         ├── dataflow-comments/
-        │   └── SKILL.md
+        │   ├── SKILL.md
+        │   └── examples/
         ├── decision-comments/
-        │   └── SKILL.md
+        │   ├── SKILL.md
+        │   └── examples/
         ├── edge-case-comments/
-        │   └── SKILL.md
+        │   ├── SKILL.md
+        │   └── examples/
         ├── deprecation-migration-comments/
-        │   └── SKILL.md
+        │   ├── SKILL.md
+        │   └── examples/
         ├── related-test-comments/
-        │   └── SKILL.md
+        │   ├── SKILL.md
+        │   └── examples/
         └── type-interface-comments/
-            └── SKILL.md
+            ├── SKILL.md
+            └── examples/
 ```
 
 ### 中文
@@ -108,36 +136,51 @@ comments-as-context/
 └── skill/                                 # 所有 skill 定义
     ├── core/          # 核心集 — 日常必用
     │   ├── file-header-comments/
-    │   │   └── SKILL.md
+    │   │   ├── SKILL.md
+    │   │   └── examples/  # before.ts / after.ts
     │   ├── function-block-comments/
-    │   │   └── SKILL.md
+    │   │   ├── SKILL.md
+    │   │   └── examples/
     │   ├── line-comments/
-    │   │   └── SKILL.md
+    │   │   ├── SKILL.md
+    │   │   └── examples/
     │   ├── variable-annotation/
-    │   │   └── SKILL.md
+    │   │   ├── SKILL.md
+    │   │   └── examples/
     │   ├── side-effect-comments/
-    │   │   └── SKILL.md
+    │   │   ├── SKILL.md
+    │   │   └── examples/
     │   ├── dependency-comments/
-    │   │   └── SKILL.md
+    │   │   ├── SKILL.md
+    │   │   └── examples/
     │   ├── invariant-comments/
-    │   │   └── SKILL.md
+    │   │   ├── SKILL.md
+    │   │   └── examples/
     │   └── magic-value-comments/
-    │       └── SKILL.md
+    │       ├── SKILL.md
+    │       └── examples/
     └── extension/     # 扩展集 — 大型项目按需启用
         ├── boundary-comments/
-        │   └── SKILL.md
+        │   ├── SKILL.md
+        │   └── examples/
         ├── dataflow-comments/
-        │   └── SKILL.md
+        │   ├── SKILL.md
+        │   └── examples/
         ├── decision-comments/
-        │   └── SKILL.md
+        │   ├── SKILL.md
+        │   └── examples/
         ├── edge-case-comments/
-        │   └── SKILL.md
+        │   ├── SKILL.md
+        │   └── examples/
         ├── deprecation-migration-comments/
-        │   └── SKILL.md
+        │   ├── SKILL.md
+        │   └── examples/
         ├── related-test-comments/
-        │   └── SKILL.md
+        │   ├── SKILL.md
+        │   └── examples/
         └── type-interface-comments/
-            └── SKILL.md
+            ├── SKILL.md
+            └── examples/
 ```
 
 ---
@@ -171,7 +214,32 @@ comments-as-context/
 
 ---
 
+## Examples / 示例
+
+每个 skill 目录下的 `examples/` 文件夹包含 `before.ts` 和 `after.ts` 代码对比，展示应用该 skill 规则前后的变化。
+
+- **before.ts** — 没有注释的原始代码
+- **after.ts** — 应用 skill 规则后的注释代码
+
+打开任意 `examples/` 目录，对比 before/after 即可直观理解该 skill 的效果。
+
+---
+
 ## Usage / 使用方式
+
+### Installation / 安装
+
+```bash
+# 方式一：npm（推荐）
+npx comments-as-context
+
+# 方式二：curl（无需 Node.js）
+bash <(curl -fsSL https://raw.githubusercontent.com/luo675/comments-as-context/main/scripts/install.sh)
+
+# 方式三：手动
+git clone https://github.com/luo675/comments-as-context.git
+cd comments-as-context && node scripts/install.js
+```
 
 ### Auto-trigger Rules / 自动匹配规则
 

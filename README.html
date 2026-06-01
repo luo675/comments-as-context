@@ -305,6 +305,73 @@
   .principle-card h4 { font-size: 1em; font-weight: 600; margin-bottom: 6px; }
   .principle-card p { color: var(--text2); font-size: 0.85em; }
 
+  /* Compatibility Matrix */
+  .compat-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .compat-table th, .compat-table td {
+    padding: 10px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9em;
+  }
+  .compat-table th {
+    font-weight: 600;
+    color: var(--text2);
+    background: var(--surface2);
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .compat-table td:last-child { font-family: var(--mono); font-size: 0.85em; }
+  .compat-table tr:last-child td { border-bottom: none; }
+
+  /* Installation Block */
+  .install-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+  .install-box code {
+    display: block;
+    padding: 8px 12px;
+    margin: 4px 0;
+    background: var(--surface2);
+    border-radius: 6px;
+    font-family: var(--mono);
+    font-size: 0.85em;
+    color: var(--green);
+  }
+  .install-box .comment {
+    color: var(--text2);
+    font-size: 0.8em;
+    margin-left: 4px;
+  }
+
+  /* Examples Section */
+  .example-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin: 12px 0;
+  }
+  .example-card .file-label {
+    font-family: var(--mono);
+    font-size: 0.8em;
+    color: var(--accent2);
+    margin-bottom: 4px;
+  }
+  .example-card p { color: var(--text2); font-size: 0.9em; }
+
   /* Language content visibility */
   .lang-en, .lang-cn { transition: opacity 0.2s; }
   .show-en .lang-cn:not(.always) { display: none; }
@@ -381,6 +448,25 @@
 
 <div class="container">
 
+  <!-- Compatibility -->
+  <h2 class="section-title">
+    <span class="lang-en always">📊 Compatibility</span>
+    <span class="lang-cn always">📊 兼容性</span>
+    <span class="cn lang-en">Tool support matrix</span>
+    <span class="cn lang-cn">各工具支持情况</span>
+  </h2>
+  <table class="compat-table">
+    <tr><th><span class="lang-en">Tool</span><span class="lang-cn">工具</span></th><th><span class="lang-en">Support</span><span class="lang-cn">支持</span></th></tr>
+    <tr><td>Claude Code</td><td>✅ Native skill format</td></tr>
+    <tr><td>Cursor</td><td>✅ Rule format agnostic</td></tr>
+    <tr><td>GitHub Copilot</td><td>✅ Comment conventions apply to any AI</td></tr>
+    <tr><td>Kiro</td><td>⚠️ Format conversion required</td></tr>
+  </table>
+  <div class="install-box" style="margin-top: -8px; margin-bottom: 24px;">
+    <span class="lang-en">Installation takes ~10 seconds. See below.</span>
+    <span class="lang-cn">安装仅需约 10 秒，详见下方。</span>
+  </div>
+
   <!-- Core Skills -->
   <h2 class="section-title">
     <span class="lang-en always">🧩 Core Skills</span>
@@ -399,6 +485,20 @@
   </h2>
   <div class="skill-grid" id="ext-list"></div>
 
+  <!-- Examples -->
+  <h2 class="section-title">
+    <span class="lang-en always">📝 Examples</span>
+    <span class="lang-cn always">📝 示例</span>
+    <span class="cn lang-en">before.ts / after.ts comparison per skill</span>
+    <span class="cn lang-cn">每个 skill 的 before/after 代码对比</span>
+  </h2>
+  <div class="example-card">
+    <p>
+      <span class="lang-en">Each skill directory contains an <code>examples/</code> folder with <strong>before.ts</strong> (raw code without annotations) and <strong>after.ts</strong> (fully annotated code applying the skill's rules). Open any <code>examples/</code> folder to see the difference.</span>
+      <span class="lang-cn">每个 skill 目录下的 <code>examples/</code> 文件夹包含 <strong>before.ts</strong>（未应用规则的原始代码）和 <strong>after.ts</strong>（完整应用规则后的注释代码）。打开任意 <code>examples/</code> 目录即可直观对比。</span>
+    </p>
+  </div>
+
   <!-- Composition Rules -->
   <h2 class="section-title">
     <span class="lang-en always">⚡ Composition Rules</span>
@@ -407,6 +507,30 @@
     <span class="cn lang-cn">一个场景，多套 skill 同时生效</span>
   </h2>
   <div class="overlay-box" id="composition-list"></div>
+
+  <!-- Installation -->
+  <h2 class="section-title">
+    <span class="lang-en always">⚡ Installation</span>
+    <span class="lang-cn always">⚡ 安装</span>
+    <span class="cn lang-en">Three ways to install</span>
+    <span class="cn lang-cn">三种安装方式</span>
+  </h2>
+  <div class="install-box">
+    <span class="lang-en"><strong>Option 1: npm (recommended)</strong></span>
+    <span class="lang-cn"><strong>方式一：npm（推荐）</strong></span>
+    <code>npx comments-as-context</code>
+  </div>
+  <div class="install-box">
+    <span class="lang-en"><strong>Option 2: curl (no Node.js required)</strong></span>
+    <span class="lang-cn"><strong>方式二：curl（无需 Node.js）</strong></span>
+    <code>bash &lt;(curl -fsSL https://raw.githubusercontent.com/luo675/comments-as-context/main/scripts/install.sh)</code>
+  </div>
+  <div class="install-box">
+    <span class="lang-en"><strong>Option 3: manual clone</strong></span>
+    <span class="lang-cn"><strong>方式三：手动</strong></span>
+    <code>git clone https://github.com/luo675/comments-as-context.git</code>
+    <code>cd comments-as-context && node scripts/install.js</code>
+  </div>
 
   <!-- Principles -->
   <h2 class="section-title">
