@@ -1,3 +1,8 @@
+---
+name: line-comments
+description: Adds inline comments for non-obvious logic, algorithm decisions, hacks, performance optimizations, and business rules. Triggers on: complex logic, algorithm implementation, performance optimization, or framework workaround code.
+---
+
 # Line Comments / 行内注释
 
 ## Purpose

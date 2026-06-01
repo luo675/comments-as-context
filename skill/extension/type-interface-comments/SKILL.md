@@ -1,3 +1,8 @@
+---
+name: type-interface-comments
+description: Ensures structured annotations on TypeScript type aliases, interfaces, generic parameters, and complex union types. Triggers on: defining interfaces, type aliases, generic parameters, union types, or modifying existing type fields.
+---
+
 # Type & Interface Comments / 类型与接口注释
 
 ## Purpose

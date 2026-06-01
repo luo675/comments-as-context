@@ -66,21 +66,37 @@ comments-as-context/
 ├── README.html        # HTML version — visual display with EN/CN toggle
 └── comments-as-context/skill/             # All skill definitions
     ├── core/          # Core skills — daily use, always loaded
-    │   ├── file-header-comments.md
-    │   ├── function-block-comments.md
-    │   ├── line-comments.md
-    │   ├── variable-annotation.md
-    │   ├── side-effect-comments.md
-    │   ├── dependency-comments.md
-    │   ├── invariant-comments.md
-    │   └── magic-value-comments.md
+    │   ├── file-header-comments/
+    │   │   └── SKILL.md
+    │   ├── function-block-comments/
+    │   │   └── SKILL.md
+    │   ├── line-comments/
+    │   │   └── SKILL.md
+    │   ├── variable-annotation/
+    │   │   └── SKILL.md
+    │   ├── side-effect-comments/
+    │   │   └── SKILL.md
+    │   ├── dependency-comments/
+    │   │   └── SKILL.md
+    │   ├── invariant-comments/
+    │   │   └── SKILL.md
+    │   └── magic-value-comments/
+    │       └── SKILL.md
     └── extension/     # Extension skills — large projects, opt-in
-        ├── boundary-comments.md
-        ├── dataflow-comments.md
-        ├── decision-comments.md
-        ├── edge-case-comments.md
-        ├── deprecation-migration-comments.md
-        └── related-test-comments.md
+        ├── boundary-comments/
+        │   └── SKILL.md
+        ├── dataflow-comments/
+        │   └── SKILL.md
+        ├── decision-comments/
+        │   └── SKILL.md
+        ├── edge-case-comments/
+        │   └── SKILL.md
+        ├── deprecation-migration-comments/
+        │   └── SKILL.md
+        ├── related-test-comments/
+        │   └── SKILL.md
+        └── type-interface-comments/
+            └── SKILL.md
 ```
 
 ### 中文
@@ -134,7 +150,8 @@ comments-as-context/
 | ⑪ | Decision | `extension/decision-comments` | Technical choices | Why, not what |
 | ⑫ | Edge Case | `extension/edge-case-comments` | Special inputs/concurrency | Boundary conditions, error paths |
 | ⑬ | Deprecation | `extension/deprecation-migration-comments` | Refactoring/upgrading | Deprecated code, migration path |
-| ⑭ | Related Tests | `extension/related-test-comments` | After implementation changes | Which tests, what they cover |
+| ⑭ | Type & Interface | `extension/type-interface-comments` | Type definitions | Structured annotations on types, interfaces, generics |
+| ⑮ | Related Tests | `extension/related-test-comments` | After implementation changes | Which tests, what they cover |
 
 ---
 
@@ -159,6 +176,7 @@ Add to `CLAUDE.md` auto-match table:
 | Boundary/error path handling | `edge-case-comments` |
 | Refactoring/deprecating code | `deprecation-migration-comments` |
 | After modifying implementation | `related-test-comments` |
+| Defining interfaces or complex types | `type-interface-comments` |
 ```
 
 ### Composition Rules / 叠加规则
@@ -169,7 +187,7 @@ Multiple skills can be active simultaneously. Examples:
 |----------|--------|
 | Creating a new file | ① File Header + ⑧ Magic Value (if any) |
 | Writing a function with side effects | ② Function Block + ⑤ Side Effect + ⑥ Dependency + ⑦ Invariant |
-| Refactoring a module | ⑬ Deprecation + ⑭ Related Tests |
+| Refactoring a module | ⑬ Deprecation + ⑮ Related Tests |
 | Cross-layer code (large project) | ⑨ Boundary + ⑩ Data Flow |
 
 ---

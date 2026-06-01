@@ -350,8 +350,8 @@
     <span class="lang-cn">用注释弥补 AI 的上下文窗口限制。<br>让每一段代码自己说明自己。</span>
   </p>
   <span class="subtitle">
-    <span class="lang-en">14 Skills · Core + Extension · Composable</span>
-    <span class="lang-cn">14 个 Skill · 核心集 + 扩展集 · 按需叠加</span>
+    <span class="lang-en">15 Skills · Core + Extension · Composable</span>
+    <span class="lang-cn">15 个 Skill · 核心集 + 扩展集 · 按需叠加</span>
   </span>
 </div>
 
@@ -394,8 +394,8 @@
   <h2 class="section-title">
     <span class="lang-en always">🔌 Extension Skills</span>
     <span class="lang-cn always">🔌 扩展集</span>
-    <span class="cn lang-en">Large projects, opt-in, 6 skills</span>
-    <span class="cn lang-cn">大型项目按需启用，6 个</span>
+    <span class="cn lang-en">Large projects, opt-in, 7 skills</span>
+    <span class="cn lang-cn">大型项目按需启用，7 个</span>
   </h2>
   <div class="skill-grid" id="ext-list"></div>
 
@@ -482,7 +482,11 @@ const DATA = {
       descEn: 'Deprecated code, migration path, replacement API',
       descCn: '标注已废弃的代码、迁移方案、替换 API',
       tags: [{ labelEn: 'Refactoring', labelCn: '重构级', type: 'level' }] },
-    { num: '⑭', titleEn: 'Related Tests', titleCn: '关联测试注释', file: 'related-test-comments',
+    { num: '⑭', titleEn: 'Type & Interface', titleCn: '类型与接口注释', file: 'type-interface-comments',
+      descEn: 'Structured annotations on types, interfaces, generics, and union types',
+      descCn: '标注类型定义、接口、泛型参数及联合类型的设计约束',
+      tags: [{ labelEn: 'Type-level', labelCn: '类型级', type: 'scene' }] },
+    { num: '⑮', titleEn: 'Related Tests', titleCn: '关联测试注释', file: 'related-test-comments',
       descEn: 'Which tests cover this code, what scenarios they test',
       descCn: '修改代码后标注关联的测试文件、覆盖的场景',
       tags: [{ labelEn: 'Testing', labelCn: '测试级', type: 'scene' }] },
@@ -495,8 +499,8 @@ const DATA = {
       skillsEn: '② Function Block + ⑤ Side Effect + ⑥ Dependency + ⑦ Invariant',
       skillsCn: '② 函数注释 + ⑤ 副作用 + ⑥ 上下游 + ⑦ 约束' },
     { icon: '🔄', scenarioEn: 'Refactoring a module', scenarioCn: '重构模块',
-      skillsEn: '⑬ Deprecation + ⑭ Related Tests',
-      skillsCn: '⑬ 废弃注释 + ⑭ 关联测试' },
+      skillsEn: '⑬ Deprecation + ⑮ Related Tests',
+      skillsCn: '⑬ 废弃注释 + ⑮ 关联测试' },
     { icon: '🏗️', scenarioEn: 'Cross-layer code (large project)', scenarioCn: '写跨层代码（大项目）',
       skillsEn: '⑨ Boundary + ⑩ Data Flow',
       skillsCn: '⑨ 层级边界 + ⑩ 数据流' },
@@ -539,7 +543,7 @@ function renderCards(skills, listId, type) {
           <h3>
             <span class="lang-en">${s.titleEn}</span>
             <span class="lang-cn">${s.titleCn}</span>
-            <span class="file">${s.file}.md</span>
+            <span class="file">${s.file}/SKILL.md</span>
           </h3>
           <div class="desc">
             <span class="lang-en">${s.descEn}</span>

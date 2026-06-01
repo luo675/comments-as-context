@@ -1,3 +1,8 @@
+---
+name: related-test-comments
+description: Associates implementation code with test files and test coverage scenarios. Triggers on: modifying implementation code (especially bug fixes, new features, core logic refactoring).
+---
+
 # Related Test Comments / 关联测试注释
 
 ## Purpose

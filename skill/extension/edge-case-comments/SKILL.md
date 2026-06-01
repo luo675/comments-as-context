@@ -1,3 +1,8 @@
+---
+name: edge-case-comments
+description: Annotates edge case handling — boundary inputs, concurrency conditions, error recovery paths beyond the happy path. Triggers on: input validation, error recovery, concurrency control, distributed system communication, or type boundary code.
+---
+
 # Edge Case Comments / 边界条件注释
 
 ## Purpose

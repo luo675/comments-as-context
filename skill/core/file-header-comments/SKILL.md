@@ -1,3 +1,8 @@
+---
+name: file-header-comments
+description: Enforces structured file header comments explaining file purpose, related files, and modification history. Triggers on: creating or editing files without header comments.
+---
+
 # File Header Comments / 文件头注释
 
 ## Purpose

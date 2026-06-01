@@ -1,3 +1,8 @@
+---
+name: boundary-comments
+description: Marks code's architectural layer, dependency direction, and forbidden crossing boundaries in multi-module projects. Triggers on: creating or modifying files on layer boundaries in layered architecture or multi-module projects.
+---
+
 # Boundary Comments / 边界注释
 
 ## Purpose

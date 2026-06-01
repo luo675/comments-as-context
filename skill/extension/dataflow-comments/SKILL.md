@@ -1,3 +1,8 @@
+---
+name: dataflow-comments
+description: Documents data flow paths — sources, processing chains, and destinations through the system. Triggers on: implementing data pipelines, ETL processes, multi-step processing chains, or cross-service data sync code.
+---
+
 # Dataflow Comments / 数据流注释
 
 ## Purpose

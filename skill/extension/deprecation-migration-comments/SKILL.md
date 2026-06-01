@@ -1,3 +1,8 @@
+---
+name: deprecation-migration-comments
+description: Labels deprecated code with replacement, removal plan, and migration path. Triggers on: API signature changes, function/module renaming, library upgrades, refactoring deletions, or TODO-marked code for removal.
+---
+
 # Deprecation & Migration Comments / 废弃与迁移注释
 
 ## Purpose

@@ -1,3 +1,8 @@
+---
+name: dependency-comments
+description: Annotates callers and callees at function/module headers to form explicit call chain knowledge. Triggers on: writing or modifying public functions called from multiple sites, or functions in deep call chains.
+---
+
 # Dependency Comments / 上下游依赖注释
 
 ## Purpose
