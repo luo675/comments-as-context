@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>comments-as-context — Comments as Context</title>
+<style>
+  :root {
+    --bg: #0f0f14;
+    --surface: #18181f;
+    --surface2: #1e1e28;
+    --border: #2a2a3a;
+    --text: #e4e4ec;
+    --text2: #9090a8;
+    --accent: #7c6ff0;
+    --accent2: #b8aeff;
+    --green: #5cce8a;
+    --orange: #f0a85c;
+    --red: #f05c5c;
+    --blue: #5c9cf0;
+    --pink: #f05cc8;
+    --cyan: #5cd4f0;
+    --radius: 12px;
+    --font: -apple-system, "Segoe UI", "Noto Sans SC", system-ui, sans-serif;
+    --mono: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 0;
+  }
+
+  /* Language Toggle */
+  .lang-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 100;
+    display: flex;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  }
+  .lang-toggle button {
+    padding: 8px 18px;
+    border: none;
+    background: transparent;
+    color: var(--text2);
+    font-size: 0.85em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font);
+  }
+  .lang-toggle button:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+  .lang-toggle button.active {
+    color: var(--accent2);
+    background: rgba(124, 111, 240, 0.15);
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 80px 24px 60px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f14 100%);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(124, 111, 240, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(92, 212, 240, 0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero h1 {
+    font-size: 2.8em;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+    position: relative;
+    background: linear-gradient(135deg, var(--accent), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.3;
+  }
+  .hero h1 span.cn { font-size: 0.6em; display: block; margin-top: 4px; }
+  .hero p {
+    font-size: 1.1em;
+    color: var(--text2);
+    max-width: 640px;
+    margin: 0 auto;
+    position: relative;
+    line-height: 1.8;
+  }
+  .hero .subtitle {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    background: rgba(124, 111, 240, 0.12);
+    color: var(--accent2);
+    font-size: 0.9em;
+    border: 1px solid rgba(124, 111, 240, 0.2);
+    position: relative;
+  }
+
+  /* Problem Banner */
+  .problem-banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin: -32px auto 0;
+    max-width: 720px;
+    padding: 24px 32px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .problem-banner .label {
+    color: var(--orange);
+    font-weight: 700;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .problem-banner p {
+    color: var(--text2);
+    font-size: 0.95em;
+  }
+  .problem-banner strong { color: var(--text); }
+
+  /* Lang Decision Banner */
+  .lang-decision {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    margin: 24px auto 0;
+    max-width: 720px;
+    padding: 20px 28px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 4px 20px rgba(124, 111, 240, 0.1);
+  }
+  .lang-decision .label {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .lang-decision p {
+    color: var(--text2);
+    font-size: 0.9em;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+
+  /* Section */
+  .section-title {
+    font-size: 1.6em;
+    font-weight: 700;
+    margin: 48px 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .section-title .cn { color: var(--text2); font-size: 0.7em; font-weight: 400; width: 100%; }
+  .section-title .count {
+    font-size: 0.5em;
+    color: var(--text2);
+    font-weight: 400;
+    margin-left: auto;
+  }
+
+  /* Skill Cards */
+  .skill-grid { display: grid; gap: 16px; }
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    transition: border-color 0.2s, transform 0.15s;
+    cursor: default;
+  }
+  .skill-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+  .skill-card .header {
+    display: flex;
+    align-items: start;
+    gap: 16px;
+  }
+  .skill-card .num {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85em;
+    flex-shrink: 0;
+    font-family: var(--mono);
+  }
+  .skill-card .num.core { background: rgba(124, 111, 240, 0.15); color: var(--accent2); }
+  .skill-card .num.ext  { background: rgba(92, 212, 240, 0.12); color: var(--cyan); }
+  .skill-card .info { flex: 1; }
+  .skill-card .info h3 {
+    font-size: 1.05em;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .skill-card .info h3 .file {
+    font-family: var(--mono);
+    font-size: 0.7em;
+    font-weight: 400;
+    color: var(--text2);
+    margin-left: 8px;
+  }
+  .skill-card .info .desc {
+    color: var(--text2);
+    font-size: 0.9em;
+  }
+  .skill-card .info .desc .cn { color: var(--text2); font-size: 0.9em; display: block; margin-top: 2px; }
+  .skill-card .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .skill-card .tags .tag {
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 0.75em;
+    font-weight: 500;
+  }
+  .tag.scene  { background: rgba(92, 156, 240, 0.12); color: var(--blue); }
+  .tag.lang   { background: rgba(92, 206, 138, 0.12); color: var(--green); }
+  .tag.level  { background: rgba(240, 168, 92, 0.12); color: var(--orange); }
+  .tag.core-tag { background: rgba(124, 111, 240, 0.12); color: var(--accent2); }
+
+  /* Overlay Rules */
+  .overlay-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+  .overlay-box .flow-item {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    padding: 6px 0;
+    font-size: 0.9em;
+  }
+  .overlay-box .flow-item .arrow { flex-shrink: 0; }
+  .overlay-box .flow-item .scenario { color: var(--text); }
+  .overlay-box .flow-item .skills {
+    color: var(--text2);
+    font-family: var(--mono);
+    font-size: 0.85em;
+  }
+  .overlay-box .flow-item .cn { display: block; color: var(--text2); font-size: 0.85em; }
+
+  /* Principle Cards */
+  .principle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .principle-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+  }
+  .principle-card .icon { font-size: 2em; margin-bottom: 8px; }
+  .principle-card h4 { font-size: 1em; font-weight: 600; margin-bottom: 6px; }
+  .principle-card p { color: var(--text2); font-size: 0.85em; }
+
+  /* Language content visibility */
+  .lang-en, .lang-cn { transition: opacity 0.2s; }
+  .show-en .lang-cn:not(.always) { display: none; }
+  .show-cn .lang-en:not(.always) { display: none; }
+  .always { display: revert; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--text2);
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.8em; }
+    .hero h1 span.cn { font-size: 0.65em; }
+    .problem-banner { margin: -24px 12px 0; }
+    .container { padding: 24px 16px; }
+    .lang-toggle { top: 12px; right: 12px; }
+    .lang-toggle button { padding: 6px 12px; font-size: 0.8em; }
+  }
+</style>
+</head>
+<body class="show-en">
+
+<div class="lang-toggle">
+  <button onclick="setLang('en')" id="btn-en" class="active">EN</button>
+  <button onclick="setLang('cn')" id="btn-cn">中文</button>
+</div>
+
+<div class="hero">
+  <h1>
+    <span class="lang-en">✦ Comments as Context</span>
+    <span class="lang-cn">✦ 注释即上下文</span>
+    <span class="cn lang-en">comments-as-context</span>
+    <span class="cn lang-cn">comments-as-context</span>
+  </h1>
+  <p>
+    <span class="lang-en">Using comments to compensate for AI's limited context window.<br>Let every piece of code explain itself.</span>
+    <span class="lang-cn">用注释弥补 AI 的上下文窗口限制。<br>让每一段代码自己说明自己。</span>
+  </p>
+  <span class="subtitle">
+    <span class="lang-en">14 Skills · Core + Extension · Composable</span>
+    <span class="lang-cn">14 个 Skill · 核心集 + 扩展集 · 按需叠加</span>
+  </span>
+</div>
+
+<div class="problem-banner">
+  <div class="label">
+    <span class="lang-en">⚡ Pain Point</span>
+    <span class="lang-cn">⚡ 痛点</span>
+  </div>
+  <p>
+    <span class="lang-en"><strong>AI modifies code with limited context — it doesn't know what code is related.</strong> Fixed one thing, broke another. Comments act as a panoramic map for the AI.</span>
+    <span class="lang-cn"><strong>AI 改代码时只看到一段，不知道关联了谁、被谁调用。</strong> 改了这里，漏了那里。加上注释，等于给 AI 装了「全景地图」。</span>
+  </p>
+</div>
+
+<div class="lang-decision">
+  <div class="label">
+    <span class="lang-en">📝 Language Decision</span>
+    <span class="lang-cn">📝 语言决策</span>
+  </div>
+  <p>
+    <span class="lang-en"><strong>All comments generated by these skills MUST be in English.</strong><br>
+    Why? ① English saves ~30% tokens (directly helps the "compensate context" goal) ② Code itself is English — same language eliminates semantic translation cost ③ Universal for any project.</span>
+    <span class="lang-cn"><strong>所有由这些 skill 生成的注释必须使用英文编写。</strong><br>
+    原因：① 节省约 30% token（直接有利于「弥补上下文」的目标）② 代码本身是英文，同语言消除语义转换损耗 ③ 普适性，可用于任何项目。</span>
+  </p>
+</div>
+
+<div class="container">
+
+  <!-- Core Skills -->
+  <h2 class="section-title">
+    <span class="lang-en always">🧩 Core Skills</span>
+    <span class="lang-cn always">🧩 核心集</span>
+    <span class="cn lang-en">Daily use, 8 skills</span>
+    <span class="cn lang-cn">日常必用，8 个</span>
+  </h2>
+  <div class="skill-grid" id="core-list"></div>
+
+  <!-- Extension Skills -->
+  <h2 class="section-title">
+    <span class="lang-en always">🔌 Extension Skills</span>
+    <span class="lang-cn always">🔌 扩展集</span>
+    <span class="cn lang-en">Large projects, opt-in, 6 skills</span>
+    <span class="cn lang-cn">大型项目按需启用，6 个</span>
+  </h2>
+  <div class="skill-grid" id="ext-list"></div>
+
+  <!-- Composition Rules -->
+  <h2 class="section-title">
+    <span class="lang-en always">⚡ Composition Rules</span>
+    <span class="lang-cn always">⚡ 叠加规则</span>
+    <span class="cn lang-en">Multiple skills active at once per scenario</span>
+    <span class="cn lang-cn">一个场景，多套 skill 同时生效</span>
+  </h2>
+  <div class="overlay-box" id="composition-list"></div>
+
+  <!-- Principles -->
+  <h2 class="section-title">
+    <span class="lang-en always">🎯 Design Principles</span>
+    <span class="lang-cn always">🎯 设计原则</span>
+  </h2>
+  <div class="principle-grid" id="principle-list"></div>
+
+</div>
+
+<div class="footer">
+  <p><span class="lang-en">Location: </span><span class="lang-cn">位置：</span><code>comments-as-context/</code></p>
+  <p>
+    <span class="lang-en">README.md is the AI-readable structured document · This page is the visual version for you.</span>
+    <span class="lang-cn">README.md 是给 AI 读的结构化文档 · 本页是给你看的视觉版。</span>
+  </p>
+</div>
+
+<script>
+const DATA = {
+  core: [
+    { num: '①', titleEn: 'File Header', titleCn: '文件头注释', file: 'file-header-comments',
+      descEn: 'Purpose of file, related files at the top of each file',
+      descCn: '每个文件开头写：文件作用、关联文件',
+      tags: [{ labelEn: 'File-level', labelCn: '文件级', type: 'scene' }] },
+    { num: '②', titleEn: 'Function Block', titleCn: '函数/代码段注释', file: 'function-block-comments',
+      descEn: 'Explain what each block/function does, its parameters',
+      descCn: '每段代码说明功能，函数做什么、参数是什么',
+      tags: [{ labelEn: 'Function-level', labelCn: '函数级', type: 'scene' }] },
+    { num: '③', titleEn: 'Line Comments', titleCn: '行级注释', file: 'line-comments',
+      descEn: 'Complex or non-obvious logic lines need inline comments',
+      descCn: '复杂逻辑行、非显而易见的行为加行注释',
+      tags: [{ labelEn: 'Line-level', labelCn: '行级', type: 'scene' }] },
+    { num: '④', titleEn: 'Variable Annotation', titleCn: '变量注释', file: 'variable-annotation',
+      descEn: 'Where defined, where used — trace before modifying or deleting',
+      descCn: '标注变量定义位置、使用位置，方便删改前统筹',
+      tags: [{ labelEn: 'Variable-level', labelCn: '变量级', type: 'scene' }] },
+    { num: '⑤', titleEn: 'Side Effect', titleCn: '副作用注释', file: 'side-effect-comments',
+      descEn: 'Mutates global state, writes files, makes network calls — flag it',
+      descCn: '函数有副作用时标注：修改全局、写文件、发请求等',
+      tags: [{ labelEn: 'Function-level', labelCn: '函数级', type: 'scene' }] },
+    { num: '⑥', titleEn: 'Dependency', titleCn: '上下游依赖注释', file: 'dependency-comments',
+      descEn: 'Who calls me (callers), what I call (callees)',
+      descCn: '标注谁调用我（callers）、我调用谁（callees）',
+      tags: [{ labelEn: 'Function-level', labelCn: '函数级', type: 'scene' }] },
+    { num: '⑦', titleEn: 'Invariant', titleCn: '不变量/约束注释', file: 'invariant-comments',
+      descEn: 'Conditions that must always hold — break them and you get bugs',
+      descCn: '标注必须保持的条件，改了就会出 bug 的那些约束',
+      tags: [{ labelEn: 'Logic-level', labelCn: '逻辑级', type: 'scene' }] },
+    { num: '⑧', titleEn: 'Magic Value', titleCn: '魔法值/配置注释', file: 'magic-value-comments',
+      descEn: 'Meaning, scope, impact of changes for constants and config',
+      descCn: '标注常量的含义、控制范围、修改影响面',
+      tags: [{ labelEn: 'Constant-level', labelCn: '常量级', type: 'scene' }] },
+  ],
+  ext: [
+    { num: '⑨', titleEn: 'Boundary', titleCn: '层级边界注释', file: 'boundary-comments',
+      descEn: 'Current layer, dependency direction — avoid architecture violations',
+      descCn: '标注当前代码所属层级和依赖边界，避免突破架构约束',
+      tags: [{ labelEn: 'Architecture', labelCn: '架构级', type: 'level' }] },
+    { num: '⑩', titleEn: 'Data Flow', titleCn: '数据流注释', file: 'dataflow-comments',
+      descEn: 'Where data originates, transforms, and ends up',
+      descCn: '标注数据从哪来、经过哪些处理、往哪去',
+      tags: [{ labelEn: 'Architecture', labelCn: '架构级', type: 'level' }] },
+    { num: '⑪', titleEn: 'Decision', titleCn: '设计决策注释', file: 'decision-comments',
+      descEn: 'Why, not what — explain technical choices and trade-offs',
+      descCn: '标注为什么这么做，不是做了什么 — 解释技术选型',
+      tags: [{ labelEn: 'Decision-level', labelCn: '决策级', type: 'level' }] },
+    { num: '⑫', titleEn: 'Edge Case', titleCn: '边界情况注释', file: 'edge-case-comments',
+      descEn: 'Boundary conditions, error paths, concurrency handling',
+      descCn: '标注边界条件、错误路径、并发场景的处理逻辑',
+      tags: [{ labelEn: 'Logic-level', labelCn: '逻辑级', type: 'scene' }] },
+    { num: '⑬', titleEn: 'Deprecation', titleCn: '废弃/迁移注释', file: 'deprecation-migration-comments',
+      descEn: 'Deprecated code, migration path, replacement API',
+      descCn: '标注已废弃的代码、迁移方案、替换 API',
+      tags: [{ labelEn: 'Refactoring', labelCn: '重构级', type: 'level' }] },
+    { num: '⑭', titleEn: 'Related Tests', titleCn: '关联测试注释', file: 'related-test-comments',
+      descEn: 'Which tests cover this code, what scenarios they test',
+      descCn: '修改代码后标注关联的测试文件、覆盖的场景',
+      tags: [{ labelEn: 'Testing', labelCn: '测试级', type: 'scene' }] },
+  ],
+  composition: [
+    { icon: '📁', scenarioEn: 'Creating a new file', scenarioCn: '创建新文件',
+      skillsEn: '① File Header + ⑧ Magic Value (if any)',
+      skillsCn: '① 文件头 + ⑧ 魔法值（若有）' },
+    { icon: '🔧', scenarioEn: 'Writing a function with side effects', scenarioCn: '写有副作用的函数',
+      skillsEn: '② Function Block + ⑤ Side Effect + ⑥ Dependency + ⑦ Invariant',
+      skillsCn: '② 函数注释 + ⑤ 副作用 + ⑥ 上下游 + ⑦ 约束' },
+    { icon: '🔄', scenarioEn: 'Refactoring a module', scenarioCn: '重构模块',
+      skillsEn: '⑬ Deprecation + ⑭ Related Tests',
+      skillsCn: '⑬ 废弃注释 + ⑭ 关联测试' },
+    { icon: '🏗️', scenarioEn: 'Cross-layer code (large project)', scenarioCn: '写跨层代码（大项目）',
+      skillsEn: '⑨ Boundary + ⑩ Data Flow',
+      skillsCn: '⑨ 层级边界 + ⑩ 数据流' },
+  ],
+  principles: [
+    { icon: '🎛️', titleEn: 'On-demand', titleCn: '按需触发',
+      descEn: 'Only load the relevant skill for the current scenario',
+      descCn: '只在具体场景加载对应 skill，不一次性全部加载' },
+    { icon: '🧱', titleEn: 'Composable', titleCn: '可叠加',
+      descEn: 'Multiple skills apply simultaneously without conflict',
+      descCn: '多个 skill 规则同时生效，注释叠加不冲突' },
+    { icon: '📈', titleEn: 'Progressive', titleCn: '渐进增强',
+      descEn: 'Core for daily use, extensions for large projects',
+      descCn: '核心集日常必用，扩展集大型项目按需启用' },
+    { icon: '✅', titleEn: 'Examples Required', titleCn: '有例可循',
+      descEn: 'Every skill must include positive and negative examples',
+      descCn: '每个 skill 必须有正例和反例，降低歧义' },
+    { icon: '🌐', titleEn: 'English Only', titleCn: '仅英文',
+      descEn: 'All comments in English, rules language-agnostic',
+      descCn: '注释统一用英文，规则适用于多种语言' },
+  ]
+};
+
+function render() {
+  renderCards(DATA.core, 'core-list', 'core');
+  renderCards(DATA.ext, 'ext-list', 'ext');
+  renderComposition();
+  renderPrinciples();
+}
+
+function renderCards(skills, listId, type) {
+  const list = document.getElementById(listId);
+  skills.forEach(s => {
+    const card = document.createElement('div');
+    card.className = 'skill-card';
+    card.innerHTML = `
+      <div class="header">
+        <div class="num ${type}">${s.num}</div>
+        <div class="info">
+          <h3>
+            <span class="lang-en">${s.titleEn}</span>
+            <span class="lang-cn">${s.titleCn}</span>
+            <span class="file">${s.file}.md</span>
+          </h3>
+          <div class="desc">
+            <span class="lang-en">${s.descEn}</span>
+            <span class="lang-cn">${s.descCn}</span>
+          </div>
+          <div class="tags">
+            ${s.tags.map(t =>
+              `<span class="tag ${t.type}"><span class="lang-en">${t.labelEn}</span><span class="lang-cn">${t.labelCn}</span></span>`
+            ).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+    list.appendChild(card);
+  });
+}
+
+function renderComposition() {
+  const box = document.getElementById('composition-list');
+  DATA.composition.forEach(item => {
+    const el = document.createElement('div');
+    el.className = 'flow-item';
+    el.innerHTML = `
+      <span class="arrow">${item.icon}</span>
+      <div>
+        <span class="scenario lang-en">${item.scenarioEn} →</span>
+        <span class="scenario lang-cn">${item.scenarioCn} →</span>
+        <span class="skills lang-en">${item.skillsEn}</span>
+        <span class="skills lang-cn">${item.skillsCn}</span>
+      </div>
+    `;
+    box.appendChild(el);
+  });
+}
+
+function renderPrinciples() {
+  const grid = document.getElementById('principle-list');
+  DATA.principles.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'principle-card';
+    card.innerHTML = `
+      <div class="icon">${p.icon}</div>
+      <h4><span class="lang-en">${p.titleEn}</span><span class="lang-cn">${p.titleCn}</span></h4>
+      <p><span class="lang-en">${p.descEn}</span><span class="lang-cn">${p.descCn}</span></p>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function setLang(lang) {
+  document.body.className = 'show-' + lang;
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-cn').classList.toggle('active', lang === 'cn');
+  localStorage.setItem('preferred-lang', lang);
+}
+
+// Restore preference
+const saved = localStorage.getItem('preferred-lang');
+if (saved === 'en' || saved === 'cn') setLang(saved);
+
+render();
+</script>
+
+</body>
+</html>
