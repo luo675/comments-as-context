@@ -1,5 +1,8 @@
 # comments-as-context
-# comments-as-context
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub last commit](https://img.shields.io/github/last-commit/luo675/comments-as-context)](https://github.com/luo675/comments-as-context)
+[![GitHub repo size](https://img.shields.io/github/repo-size/luo675/comments-as-context)](https://github.com/luo675/comments-as-context)
 
 > Comments as Context — Using comments to compensate for AI's limited context window.
 > 注释即上下文 — 用注释弥补 AI 的上下文窗口限制。
