@@ -71,16 +71,19 @@ async function generateMonthlyReport(month: string): Promise<Buffer> { ... }
 ### ❌ Bad
 
 ```typescript
-// TODO: remove later
-async function createUser(input: CreateUserInput): Promise<User> { ... }
-```
-
-```typescript
 /**
- * @deprecated Use the new function instead.
+ * Creates a new user account.
+ *
+ * @deprecated Use createUserV2 instead.
  */
 async function createUser(input: CreateUserInput): Promise<User> { ... }
 ```
+
+The `@deprecated` says "Use createUserV2 instead" but is missing three critical pieces:
+1. **Why** — is it for security (OAuth/MFA), performance, or API design?
+2. **Removal plan** — what version or date should this be removed by?
+3. **Migration path** — is V2 a drop-in replacement, or do callers need to change their input format?
+An AI can mark it as deprecated but can't safely migrate callers or plan for its removal.
 
 ## Auto-trigger
 

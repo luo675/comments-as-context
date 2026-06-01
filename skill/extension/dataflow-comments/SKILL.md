@@ -87,15 +87,20 @@ function processLogs(input: ReadStream): void { ... }
 ### ❌ Bad
 
 ```typescript
-async function handleOrderCheckout(req: Request, res: Response): Promise<void> { ... }
+/**
+ * Processes user upload: parse file, validate content, store results.
+ */
+async function processUpload(file: Express.Multer.File): Promise<UploadResult> {
+  const parsed = parseCSV(file.buffer);           // Parse file
+  const validated = validateRows(parsed);          // Validate content
+  const enriched = await enrichData(validated);    // Enrich with metadata
+  const stored = await db.records.insertMany(enriched); // Store results
+  await notifyUser(stored.length);                 // Send notification
+  return { uploaded: stored.length };
+}
 ```
 
-```typescript
-/**
- * Handles checkout request
- */
-async function handleOrderCheckout(req: Request, res: Response): Promise<void> { ... }
-```
+Each step is named ("Parse file", "Validate content", etc.) but the DATAFLOW format/state transitions between steps are not annotated. An AI adding a deduplication step doesn't know the expected data shape at each stage — does `enrichData()` expect validated rows or raw CSV? Inserting the dedup in the wrong position could silently drop valid records.
 
 ## Auto-trigger
 

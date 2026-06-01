@@ -102,32 +102,16 @@ type OrderStatus =
 ### ❌ Bad
 
 ```typescript
-interface PaginatedResponse<T> {
-  data: T[];
-  total: number;
-  page: number;
-  pageSize: number;
-  nextCursor: string | null;
+interface OrderSummary {
+  id: string;          // order ID
+  status: string;      // current status
+  total: number;       // order total
+  items: OrderItem[];  // order items
+  createdAt: string;   // creation time
 }
 ```
 
-```typescript
-// Order status type
-type OrderStatus = 'pending' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
-```
-
-```typescript
-/**
- * @template T - The type
- */
-interface PaginatedResponse<T> {
-  data: T[];
-  total: number;
-  page: number;
-  pageSize: number;
-  nextCursor: string | null;
-}
-```
+Field names like `status` are ambiguous (order status? payment status? fulfillment status?) with only a trivial line comment "current status" that restates the name. The `total` comment "order total" doesn't specify currency, precision, or whether it includes tax/shipping. `createdAt` doesn't specify timezone or format (ISO 8601? Unix timestamp?). An AI constructing this type might populate `status` with a payment status instead of an order status, or omit timezone info in `createdAt`.
 
 ## Auto-trigger
 

@@ -65,13 +65,23 @@ notifySubscribers(payload).catch(logError);
 ### ❌ Bad
 
 ```typescript
-// Adjust deadline
+// Adjust deadline — 1ms margin for safety
 const adjustedDeadline = deadline - 1;
+
+// Set retry limit
+const maxRetries = 3;
+
+for (let attempt = 1; attempt <= maxRetries; attempt++) {
+  try {
+    return await processRequest(data);
+  } catch (err) {
+    if (attempt === maxRetries) throw err;
+    await sleep(Math.pow(2, attempt) * 1000 + Math.random() * 1000);
+  }
+}
 ```
 
-```typescript
-const total = price * quantity; // calculate total
-```
+Comments explain trivial lines ("Adjust deadline", "Set retry limit") while the complex retry logic with exponential backoff and jitter has zero explanation. An AI might "simplify" by removing `Math.random() * 1000`, not realizing it prevents the thundering herd problem on concurrent retries.
 
 ## Auto-trigger
 

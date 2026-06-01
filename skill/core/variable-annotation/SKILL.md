@@ -63,13 +63,19 @@ const dnsCache = new Map<string, DnsRecord>();
 ### ❌ Bad
 
 ```typescript
-let maxConnectionsPerUser = 10;
+// Timeout in milliseconds
+const timeoutMs = 5000;
+
+async function connect(): Promise<Connection> {
+  return connectWithTimeout({ timeout: timeoutMs });
+}
+
+async function query(sql: string): Promise<Result> {
+  return executeWithTimeout(sql, timeoutMs);
+}
 ```
 
-```typescript
-// max connections
-let maxConnectionsPerUser = 10;
-```
+The comment "Timeout in milliseconds" merely restates the name. Without `@state`/`@readBy` annotations showing that `timeoutMs` controls BOTH connection timeout AND query execution timeout, an AI optimizing for faster queries might reduce it to 1000ms, unknowingly breaking connections on slow networks.
 
 ## Auto-trigger
 

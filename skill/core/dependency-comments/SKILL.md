@@ -73,15 +73,19 @@ async function syncToWarehouse(changes: InventoryChange[]): Promise<SyncResult> 
 ### ❌ Bad
 
 ```typescript
-function generateToken(payload: JwtPayload): string { ... }
+/**
+ * Generates a signed JWT token for the given payload.
+ *
+ * @param payload - Claims to include in the token
+ * @returns A signed JWT string
+ */
+function generateToken(payload: JwtPayload): string {
+  const key = KeyService.getSigningKey();
+  return jwt.sign(payload, key, { algorithm: 'RS256' });
+}
 ```
 
-```typescript
-/**
- * Generates JWT token
- */
-function generateToken(payload: JwtPayload): string { ... }
-```
+Only parameter/return docs are present; `@callers` and `@callees` are missing. An AI modifying `generateToken()` to return `{ token, expiresAt }` instead of a plain string won't know about the three callers (AuthController.login, AuthController.refresh, tokenMiddleware) that would break.
 
 ## Auto-trigger
 

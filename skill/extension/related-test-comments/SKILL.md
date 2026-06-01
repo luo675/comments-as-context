@@ -73,14 +73,14 @@ function calculateShipping(weightGrams: number, zone: ZoneCode): Money { ... }
 ### ❌ Bad
 
 ```typescript
+/**
+ * Calculates shipping cost based on weight and destination zone.
+ * Updated to support new international zone rates.
+ */
 function calculateShipping(weightGrams: number, zone: ZoneCode): Money { ... }
 ```
 
-```typescript
-/**
- * Test file for shipping calculator
- */
-```
+The comment announces an update ("new international zone rates") but doesn't include `@tests` linking to the relevant test files. An AI or reviewer modifying this function has no way to know which test files cover it (`tests/unit/shipping/calculator.test.ts`) or what scenarios are already tested — changes might silently break existing coverage.
 
 ## Auto-trigger
 

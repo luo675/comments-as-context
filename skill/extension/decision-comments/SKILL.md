@@ -71,14 +71,11 @@ async function pollForUpdates(deviceId: string): Promise<Update[]> { ... }
 ### ❌ Bad
 
 ```typescript
-// Use raw SQL here for performance
-await db.query(`COPY inventory_items ...`);
+// DECISION: Use Redis as the session store
+const sessionStore = new RedisStore({ client: redisClient });
 ```
 
-```typescript
-// DECISION: Use polling
-async function pollForUpdates(deviceId: string): Promise<Update[]> { ... }
-```
+The comment says WHAT was chosen (Redis) but not WHY it was chosen over alternatives (Memcached? in-memory?), the context (traffic patterns, session data size, deployment environment), or the trade-offs (excellent data structure support + persistence, but adds a network hop). An AI refactoring the session layer might replace Redis with in-memory to "reduce latency," not knowing that in-memory couldn't survive Kubernetes pod restarts — the very reason Redis was originally chosen.
 
 ## Auto-trigger
 

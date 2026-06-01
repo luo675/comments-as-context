@@ -60,16 +60,17 @@ export class AuthService { ... }
 ### ❌ Bad
 
 ```typescript
-// auth stuff
-export class AuthService { ... }
+/**
+ * @file Auth related utilities
+ * @updated 2026-05-28
+ */
+export class AuthService {
+  async login(email: string, password: string): Promise<Session> { ... }
+  async refreshToken(token: string): Promise<string> { ... }
+}
 ```
 
-```typescript
-/**
- * Auth Service
- */
-export class AuthService { ... }
-```
+The `@file` is too generic ("Auth related utilities"). No `@related` listing the files that depend on this service (e.g., `components/LoginForm.tsx`, `stores/auth-store.ts`, `middleware/auth-guard.ts`). When an AI modifies `login()`'s return type, it won't know to also update the callers in those related files.
 
 ## Auto-trigger
 

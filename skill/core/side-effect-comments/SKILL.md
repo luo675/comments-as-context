@@ -101,21 +101,25 @@ async function purgeUserData(userId: string): Promise<void> {
 ### ❌ Bad
 
 ```typescript
-async function confirmOrder(orderId: string): Promise<void> {
-  await db.orders.update(orderId, { status: 'confirmed' });
-  emailService.sendConfirmation(orderId).catch(logError);
-  await eventBus.publish(new OrderConfirmedEvent(orderId));
+/**
+ * Calculates the final amount for an order after adjustments.
+ *
+ * @param orderId - The order to calculate
+ * @returns The calculated amount in cents
+ */
+async function calculateOrderAmount(orderId: string): Promise<number> {
+  const order = await db.orders.findById(orderId);
+  let amount = order.subtotal;
+
+  if (order.taxExempt) amount = applyTaxExemption(amount);
+  amount = applyPromotions(amount, order.promotions);
+  await db.orders.update(orderId, { calculatedAmount: amount });
+
+  return amount;
 }
 ```
 
-```typescript
-/**
- * Confirms an order
- */
-async function confirmOrder(orderId: string): Promise<void> {
-  ...
-}
-```
+The function is documented as a pure calculation function but silently WRITES to the database via `db.orders.update`. No `@sideEffects` tag is present. An AI seeing this as a "calculate" + "pure" function might treat it as idempotent — removing a "redundant" call or memoizing the result, not realizing each call also persists the calculated amount.
 
 ## Auto-trigger
 

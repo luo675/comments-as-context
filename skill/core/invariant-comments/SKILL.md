@@ -69,22 +69,16 @@ async function transferFunds(tx: Transfer): Promise<void> {
 ### ❌ Bad
 
 ```typescript
-class PriorityTaskQueue {
-  private items: Task[] = [];
+async function updateOrderStatus(orderId: string, status: OrderStatus): Promise<void> {
+  // Update cache
+  await cache.set(`order:${orderId}`, { status });
 
-  add(task: Task): void {
-    this.items.push(task);
-    this.items.sort((a, b) => b.priority - a.priority);
-  }
+  // Update database
+  await db.orders.update(orderId, { status });
 }
 ```
 
-```typescript
-/**
- * Items should stay sorted
- */
-class PriorityTaskQueue { ... }
-```
+Each operation is commented separately ("Update cache", "Update database"), but no `@invariant` declares that cache and DB MUST remain consistent. An AI might "optimize" these writes to be async (fire-and-forget) — if the DB write then fails, the system serves stale cached data, potentially showing "shipped" status for a cancelled order.
 
 ## Auto-trigger
 

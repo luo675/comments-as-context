@@ -71,13 +71,15 @@ export class UserController { ... }
 ### ❌ Bad
 
 ```typescript
-export class PostgresUserRepository implements UserRepository { ... }
+// LAYER: user module
+class UserController {
+  async getUser(id: string): Promise<User> {
+    return PostgresUserRepository.findById(id);
+  }
+}
 ```
 
-```typescript
-// Repository class
-export class PostgresUserRepository implements UserRepository { ... }
-```
+The layer annotation "user module" is too vague — it doesn't specify the architectural tier (presentation/application/domain/infrastructure) or dependency direction. An AI reading this has no way to know that `UserController` is in the presentation layer and must NOT directly call `PostgresUserRepository` in the infrastructure layer. Violation of dependency rule: UI → Service → Repository.
 
 ## Auto-trigger
 

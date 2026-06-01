@@ -80,22 +80,21 @@ function calculateOrderTotal(
 ### ❌ Bad
 
 ```typescript
-// calculate total
 function calculateOrderTotal(items: CartItem[], memberTier: string, couponCode?: string): number {
-  ...
+  // Step 1: sum all item prices
+  const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0);
+  // Step 2: apply membership discount
+  const afterMemberDisc = subtotal * (1 - MEMBER_DISCOUNT[memberTier]);
+  // Step 3: apply coupon if present
+  const afterCoupon = couponCode ? applyCoupon(afterMemberDisc, couponCode) : afterMemberDisc;
+  // Step 4: calculate tax
+  const tax = afterCoupon * TAX_RATE;
+  // Step 5: return final total
+  return afterCoupon + tax;
 }
 ```
 
-```typescript
-/**
- * Calculates total by applying discounts one by one
- * @param items - the items
- * @returns the total
- */
-function calculateOrderTotal(items: CartItem[], memberTier: string, couponCode?: string): number {
-  ...
-}
-```
+Comments say "Step 1/2/3/4/5" without explaining business intent or constraints (e.g., membership discount must apply before coupon, tax must be calculated AFTER discounts). An AI might reorder steps or insert a new step in the wrong position, producing incorrect financial calculations.
 
 ## Auto-trigger
 

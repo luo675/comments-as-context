@@ -65,19 +65,24 @@ await db.transaction(async (tx) => {
 ### ❌ Bad
 
 ```typescript
-async function getUserProfile(userId: string): Promise<UserProfile> {
-  if (!userId) return defaultProfile();
-  const profile = await db.findUser(userId);
-  return profile ?? createAnonymousProfile();
+/**
+ * Fetches paginated order history for the given user.
+ *
+ * @param userId - The user's ID
+ * @param page - Page number (1-indexed)
+ * @param pageSize - Items per page
+ */
+async function getOrderHistory(userId: string, page: number, pageSize: number): Promise<Page<Order>> {
+  const offset = (page - 1) * pageSize;
+  const rows = await db.query(
+    'SELECT * FROM orders WHERE user_id = $1 ORDER BY created_at DESC LIMIT $2 OFFSET $3',
+    [userId, pageSize, offset]
+  );
+  return { items: rows, total: await countOrders(userId), page, pageSize };
 }
 ```
 
-```typescript
-/**
- * Gets user profile. Handles missing user and anonymous access.
- */
-async function getUserProfile(userId: string): Promise<UserProfile> { ... }
-```
+No `@edgeCase` annotations for: negative page numbers (returns incorrect offset), last page with fewer items than pageSize (is that handled?), or concurrent inserts during pagination (phantom reads cause offset drift — items appear on multiple pages or get skipped). An AI copying this pagination pattern to other queries won't know about these edge cases.
 
 ## Auto-trigger
 

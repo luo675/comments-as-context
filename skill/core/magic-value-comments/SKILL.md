@@ -65,17 +65,11 @@ const USE_NEW_CHECKOUT = process.env.FEATURE_CHECKOUT_V2 === 'true';
 ### ❌ Bad
 
 ```typescript
-const RATE_LIMIT_PER_MINUTE = 100;
+// Session timeout
+const SESSION_TIMEOUT_MS = 300_000;
 ```
 
-```typescript
-// Rate limit
-const RATE_LIMIT_PER_MINUTE = 100;
-```
-
-```typescript
-if (status === 3) { ... }  // What is 3?
-```
+The comment only echoes the name ("Session timeout"). It doesn't say why 5 minutes was chosen, what the acceptable range is, or the impact of changing it — too short logs users out mid-operation, too long weakens security against session hijacking. An AI seeing this might halve it to "improve security" without realizing the impact on user experience, or double it to "reduce re-login friction" unaware of the security trade-off.
 
 ## Auto-trigger
 
