@@ -41,7 +41,7 @@ description: Adds inline comments for non-obvious logic, algorithm decisions, ha
 ### Rule 5: 与 edge-case-comments 的分界
 
 - **行注释（本 Skill）**：适用于局部、单点、实现层面的"为什么这样写"。例如一个算法步骤、一个条件判断的理由。
-- **[edge-case-comments](../skill/extension/edge-case-comments.md)**：适用于函数/模块级别的边界输入、并发竞态、错误恢复等场景。
+- **[edge-case-comments](../../extension/edge-case-comments/SKILL.md)**：适用于函数/模块级别的边界输入、并发竞态、错误恢复等场景。
 - 如果一个注释说明的是"当 X 发生时如何处理"，应使用 @edgeCase 而非行注释。
 
 ## Examples
@@ -78,5 +78,5 @@ const total = price * quantity; // calculate total
 
 ## Related Skills
 
-- [edge-case-comments](../extension/edge-case-comments.md) — 边界条件应优先使用 @edgeCase，行注释仅补充其内联细节
-- [magic-value-comments](./magic-value-comments.md) — 字面常量应提升为命名常量后注释，而非在行内注释数值
+- [edge-case-comments](../../extension/edge-case-comments/SKILL.md) — 边界条件应优先使用 @edgeCase，行注释仅补充其内联细节
+- [magic-value-comments](../magic-value-comments/SKILL.md) — 字面常量应提升为命名常量后注释，而非在行内注释数值

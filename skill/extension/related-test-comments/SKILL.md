@@ -87,5 +87,5 @@ function calculateShipping(weightGrams: number, zone: ZoneCode): Money { ... }
 
 ## Related Skills
 
-- [edge-case-comments](./edge-case-comments.md) — 测试场景应覆盖测试文件中标注的所有 @edgeCase
-- [function-block-comments](../core/function-block-comments.md) — 测试应验证 @throws 中声明的异常路径
+- [edge-case-comments](../edge-case-comments/SKILL.md) — 测试场景应覆盖测试文件中标注的所有 @edgeCase
+- [function-block-comments](../../core/function-block-comments/SKILL.md) — 测试应验证 @throws 中声明的异常路径

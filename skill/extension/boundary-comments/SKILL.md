@@ -84,5 +84,5 @@ export class PostgresUserRepository implements UserRepository { ... }
 
 ## Related Skills
 
-- [dependency-comments](../core/dependency-comments.md) — 跨层调用的 callers/callees 需遵守边界规则
-- [invariant-comments](../core/invariant-comments.md) — 架构约束是不变量的一种
+- [dependency-comments](../../core/dependency-comments/SKILL.md) — 跨层调用的 callers/callees 需遵守边界规则
+- [invariant-comments](../../core/invariant-comments/SKILL.md) — 架构约束是不变量的一种

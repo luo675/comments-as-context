@@ -84,5 +84,5 @@ async function getUserProfile(userId: string): Promise<UserProfile> { ... }
 
 ## Related Skills
 
-- [invariant-comments](../core/invariant-comments.md) — 不变量定义了"什么情况下才算边界"
-- [line-comments](../core/line-comments.md) — 简单的边界条件可用行注释代替 @edgeCase
+- [invariant-comments](../../core/invariant-comments/SKILL.md) — 不变量定义了"什么情况下才算边界"
+- [line-comments](../../core/line-comments/SKILL.md) — 简单的边界条件可用行注释代替 @edgeCase

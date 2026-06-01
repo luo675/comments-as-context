@@ -134,6 +134,6 @@ interface PaginatedResponse<T> {
 
 ## Related Skills
 
-- [function-block-comments](../core/function-block-comments.md) — 类型注释是函数签名注释的前置条件
-- [invariant-comments](../core/invariant-comments.md) — 类型层面的约束（如字段间关系）是不变量的一种
-- [deprecation-migration-comments](./deprecation-migration-comments.md) — 废弃字段的 @deprecated 标签应遵循其完整格式（替代方案 + 移除计划 + 迁移指南）
+- [function-block-comments](../../core/function-block-comments/SKILL.md) — 类型注释是函数签名注释的前置条件
+- [invariant-comments](../../core/invariant-comments/SKILL.md) — 类型层面的约束（如字段间关系）是不变量的一种
+- [deprecation-migration-comments](../deprecation-migration-comments/SKILL.md) — 废弃字段的 @deprecated 标签应遵循其完整格式（替代方案 + 移除计划 + 迁移指南）

@@ -102,6 +102,6 @@ function calculateOrderTotal(items: CartItem[], memberTier: string, couponCode?:
 
 ## Related Skills
 
-- [dependency-comments](./dependency-comments.md) — 函数签名 + callers/callees 构成完整契约
-- [side-effect-comments](./side-effect-comments.md) — 补充 @throws 无法覆盖的隐式副作用
-- [edge-case-comments](../extension/edge-case-comments.md) — 补充函数签名无法表达的边界场景
+- [dependency-comments](../dependency-comments/SKILL.md) — 函数签名 + callers/callees 构成完整契约
+- [side-effect-comments](../side-effect-comments/SKILL.md) — 补充 @throws 无法覆盖的隐式副作用
+- [edge-case-comments](../../extension/edge-case-comments/SKILL.md) — 补充函数签名无法表达的边界场景

@@ -91,4 +91,4 @@ class PriorityTaskQueue { ... }
 
 ## Related Skills
 
-- [edge-case-comments](../extension/edge-case-comments.md) — 不变量被破坏时即触发边界条件处理路径，两者互补
+- [edge-case-comments](../../extension/edge-case-comments/SKILL.md) — 不变量被破坏时即触发边界条件处理路径，两者互补

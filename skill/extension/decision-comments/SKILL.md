@@ -37,7 +37,7 @@ description: Records technical decision context — why a choice was made, what 
 ### 与行注释的分界
 
 - **本 Skill（decision-comments）**：覆盖架构/设计层面的「为什么」——为什么选 A 不选 B、为什么是这个阈值；
-- **[line-comments](../core/line-comments.md)**：覆盖实现层面的局部「为什么」——为什么这行代码这样写（算法步骤、workaround 理由）；
+- **[line-comments](../../core/line-comments/SKILL.md)**：覆盖实现层面的局部「为什么」——为什么这行代码这样写（算法步骤、workaround 理由）；
 - 如果决策理由影响函数整体或跨多个代码行，优先使用 `@decision` / `// DECISION:`；
 - 如果是单行代码的实现理由，优先使用行注释。
 
@@ -85,5 +85,5 @@ async function pollForUpdates(deviceId: string): Promise<Update[]> { ... }
 
 ## Related Skills
 
-- [magic-value-comments](../core/magic-value-comments.md) — 值由 magic-value 注释，选的理由由 decision 注释
-- [deprecation-migration-comments](./deprecation-migration-comments.md) — 过期的决策应进入废弃迁移流程
+- [magic-value-comments](../../core/magic-value-comments/SKILL.md) — 值由 magic-value 注释，选的理由由 decision 注释
+- [deprecation-migration-comments](../deprecation-migration-comments/SKILL.md) — 过期的决策应进入废弃迁移流程

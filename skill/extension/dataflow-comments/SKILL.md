@@ -102,5 +102,5 @@ async function handleOrderCheckout(req: Request, res: Response): Promise<void> {
 
 ## Related Skills
 
-- [side-effect-comments](../core/side-effect-comments.md) — 数据流中的 I/O 步骤需同时标注副作用
-- [boundary-comments](./boundary-comments.md) — 数据跨层流转需遵守架构边界
+- [side-effect-comments](../../core/side-effect-comments/SKILL.md) — 数据流中的 I/O 步骤需同时标注副作用
+- [boundary-comments](../boundary-comments/SKILL.md) — 数据跨层流转需遵守架构边界

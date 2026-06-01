@@ -76,8 +76,8 @@ export class AuthService { ... }
 
 ## Related Skills
 
-- [dependency-comments](./dependency-comments.md) — 函数级的 @callers/@callees 是 @related 的细化
-- [related-test-comments](../extension/related-test-comments.md) — 测试文件关联是 @related 的子集
+- [dependency-comments](../dependency-comments/SKILL.md) — 函数级的 @callers/@callees 是 @related 的细化
+- [related-test-comments](../../extension/related-test-comments/SKILL.md) — 测试文件关联是 @related 的子集
 
 ## 标签格式约定
 

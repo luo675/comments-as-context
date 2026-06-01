@@ -29,7 +29,7 @@ description: Annotates module-level variables, shared state, and config objects 
 ```
 
 - 如果变量是可变状态，还需额外说明修改影响面（数据一致性、并发安全等）
-- 配置对象和常量优先使用 [magic-value-comments](./magic-value-comments.md)
+- 配置对象和常量优先使用 [magic-value-comments](../magic-value-comments/SKILL.md)
 
 ### Rule 2: 具象命名 + 注释互补
 
@@ -76,5 +76,5 @@ let maxConnectionsPerUser = 10;
 
 ## Related Skills
 
-- [magic-value-comments](./magic-value-comments.md) — 常量和配置值优先使用该 Skill（当变量值不会在运行时改变时）
-- [side-effect-comments](./side-effect-comments.md) — 标注变量修改带来的副作用
+- [magic-value-comments](../magic-value-comments/SKILL.md) — 常量和配置值优先使用该 Skill（当变量值不会在运行时改变时）
+- [side-effect-comments](../side-effect-comments/SKILL.md) — 标注变量修改带来的副作用

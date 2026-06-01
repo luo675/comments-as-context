@@ -82,4 +82,4 @@ if (status === 3) { ... }  // What is 3?
 
 ## Related Skills
 
-- [decision-comments](../extension/decision-comments.md) — 注释"值是什么/控制什么"后，用 @decision 补充"为什么选这个值"
+- [decision-comments](../../extension/decision-comments/SKILL.md) — 注释"值是什么/控制什么"后，用 @decision 补充"为什么选这个值"

@@ -122,5 +122,5 @@ async function confirmOrder(orderId: string): Promise<void> {
 
 ## Related Skills
 
-- [variable-annotation](./variable-annotation.md) — 副作用修改的全局/模块变量需同时标注 @state
-- [boundary-comments](../extension/boundary-comments.md) — I/O 副作用应遵守架构层边界约束
+- [variable-annotation](../variable-annotation/SKILL.md) — 副作用修改的全局/模块变量需同时标注 @state
+- [boundary-comments](../../extension/boundary-comments/SKILL.md) — I/O 副作用应遵守架构层边界约束

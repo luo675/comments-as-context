@@ -88,5 +88,5 @@ function generateToken(payload: JwtPayload): string { ... }
 
 ## Related Skills
 
-- [file-header-comments](./file-header-comments.md) — 文件级 @related → 模块间依赖，函数级 @callers → 调用链
-- [boundary-comments](../extension/boundary-comments.md) — 跨层调用需同时满足架构边界约束
+- [file-header-comments](../file-header-comments/SKILL.md) — 文件级 @related → 模块间依赖，函数级 @callers → 调用链
+- [boundary-comments](../../extension/boundary-comments/SKILL.md) — 跨层调用需同时满足架构边界约束

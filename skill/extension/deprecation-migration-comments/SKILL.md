@@ -87,5 +87,5 @@ async function createUser(input: CreateUserInput): Promise<User> { ... }
 
 ## Related Skills
 
-- [related-test-comments](./related-test-comments.md) — 迁移后需运行关联测试验证
-- [decision-comments](./decision-comments.md) — 记录为什么放弃旧方案、为什么选新方案
+- [related-test-comments](../related-test-comments/SKILL.md) — 迁移后需运行关联测试验证
+- [decision-comments](../decision-comments/SKILL.md) — 记录为什么放弃旧方案、为什么选新方案
